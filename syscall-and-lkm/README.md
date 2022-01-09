@@ -34,19 +34,19 @@
 # Output example
 
 # Usage: ./prime_user -n <number of random numbers>
-root@vm:~/labs/lab8_9/user# ./prime_user -n 10000
+root@vm:~/syscall-and-lkm/user# ./prime_user -n 10000
 The number of total random numbers : 10000
 The number of prime numbers : 1246
 Processing time : 114660 us
 
 # Usage: ./prime_sys_test -n <number of random numbers>
-root@vm:~/labs/lab8_9/system_call# ./prime_sys_test -n 10000
+root@vm:~/syscall-and-lkm/system_call# ./prime_sys_test -n 10000
 [  486.396184] The number of total random numbers : 10000
 [  486.451566] The number of prime numbers : 1246
 [  486.451730] Processing time : 73984 us
 
 # Usage: insmod prime_module.ko n=<number of random numbers>
-root@vm:~/labs/lab8_9/kernel_module# insmod prime_module.ko n=10000
+root@vm:~/syscall-and-lkm/kernel_module# insmod prime_module.ko n=10000
 [  433.465728] The number of total random numbers : 10000
 [  433.593631] The number of prime numbers : 1256
 [  433.593891] Processing time : 71754 us
