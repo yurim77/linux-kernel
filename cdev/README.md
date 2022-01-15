@@ -20,7 +20,6 @@ skeleton developed by UPB, modified for Ajou Univ. SCE394
 * my_cdev_test.c : 구현한 문자 디바이스 드라이버를 테스트하기 위한 c 파일
 
 ### Output Example
-* 커널 모듈 실행
 ```shell
 # Output example
 root@vm:~/lab# mknod /dev/mycdev c 42 0
