@@ -8,3 +8,4 @@ index|subject|hyperlink|
 |4|interrupt and kernel synchronization|[irq-and-kernel-sync](https://github.com/yurim77/linux-kernel/tree/main/irq-and-kernel-sync)|
 |5|time delays and deferred work|[deferred-work](https://github.com/yurim77/linux-kernel/tree/main/deferred-work)|
 |6|memory mapping|[memory-mapping](https://github.com/yurim77/linux-kernel/tree/main/memory-mapping)|
+|7|memory statistics and new page replacement policy|[page-replacement](https://github.com/yurim77/linux-kernel/tree/main/page-replacement)|
