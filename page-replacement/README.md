@@ -122,4 +122,4 @@ root/project/user# ./test1
 <br/>
 
 ### Outut Example
-![image](./image.png)
+![image](./image.PNG)
