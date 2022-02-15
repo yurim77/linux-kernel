@@ -27,13 +27,13 @@ LIST_HEAD(my_list);
 
 static int list_proc_show(struct seq_file *m, void *v)
 {
-    struct list_head *i, *tmp;
-    struct string_list *entry;
-
-    list_for_each_safe(i, tmp, &my_list) {
+	struct list_head *i, *tmp;
+	struct string_list *entry;
+	
+	list_for_each_safe(i, tmp, &my_list) {
 		entry = list_entry(i, struct string_list, list);
-        seq_puts(m, entry->string);
-        seq_puts(m, "\n");
+        	seq_puts(m, entry->string);
+        	seq_puts(m, "\n");
 	}
 
 	return 0;
@@ -59,7 +59,7 @@ static int add_string(char* string, int loc) // loc 0 : addf , loc 1 : adde
 	sle->string = string;
 
 	if (loc) list_add(&sle->list, &my_list);
-    else list_add_tail(&sle->list, &my_list);
+	else list_add_tail(&sle->list, &my_list);
 
 	return 0;
 }
@@ -73,7 +73,7 @@ static int del_string(char* string, int opt) // opt 0 : delf , opt 1 : dela
 		sle = list_entry(i, struct string_list, list);
 		if (!strcmp(sle->string, string)) {
 			list_del(i);
-            kfree(sle->string);
+          		kfree(sle->string);
 			kfree(sle);
 			if(!opt) return 0;
 		}
@@ -91,7 +91,7 @@ static void destroy_list(void)
 	list_for_each_safe(i, n, &my_list) {
 		sle = list_entry(i, struct string_list, list);
 		list_del(i);
-        kfree(sle->string);
+        	kfree(sle->string);
 		kfree(sle);
 	}
 }
@@ -100,11 +100,11 @@ static ssize_t list_write(struct file *file, const char __user *buffer,
 			  size_t count, loff_t *offs)
 {
 	char local_buffer[PROCFS_MAX_SIZE], temp_local_buffer[PROCFS_MAX_SIZE];
-    char *split_local_buffer[2];
-    char *temp, *ptr = NULL; 
+	char *split_local_buffer[2];
+    	char *temp, *ptr = NULL; 
 	unsigned long local_buffer_size = 0;
-    int idx = 0;
-    char* string;
+    	int idx = 0;
+    	char* string;
 
 	local_buffer_size = count;
 	if (local_buffer_size > PROCFS_MAX_SIZE)
@@ -114,38 +114,34 @@ static ssize_t list_write(struct file *file, const char __user *buffer,
 	if (copy_from_user(local_buffer, buffer, local_buffer_size))
 		return -EFAULT;
 	
-    // parse the command
-    strcpy(temp_local_buffer, local_buffer);
-    temp = temp_local_buffer; 
+	// parse the command
+	strcpy(temp_local_buffer, local_buffer);
+	temp = temp_local_buffer; 
     
-    while((ptr = strsep(&temp, " ")) != NULL) { 
-        split_local_buffer[idx] = ptr;
-        if(!idx)  split_local_buffer[idx][strlen(split_local_buffer[idx])] = '\0';
-        else split_local_buffer[idx][strlen(split_local_buffer[idx]) - 1] = '\0';
-        idx++;
-    }
+	while((ptr = strsep(&temp, " ")) != NULL) { 
+		split_local_buffer[idx] = ptr;
+		if(!idx)  split_local_buffer[idx][strlen(split_local_buffer[idx])] = '\0';
+        	else split_local_buffer[idx][strlen(split_local_buffer[idx]) - 1] = '\0';
+       		idx++;
+	}
 
-    // add/delete elements.
-    if(!strcmp(split_local_buffer[0], "addf"))
-    {
-        string = kmalloc(sizeof(char) * strlen(split_local_buffer[1]), GFP_KERNEL);
-        strcpy(string, split_local_buffer[1]);
-        add_string(string, 1);
-    }
-    else if(!strcmp(split_local_buffer[0], "adde"))
-    {
-        string = kmalloc(sizeof(char) * strlen(split_local_buffer[1]), GFP_KERNEL);
-        strcpy(string, split_local_buffer[1]);
-        add_string(string, 0);
-    }
-    else if(!strcmp(split_local_buffer[0], "delf"))
-    {
+	// add/delete elements.
+	if(!strcmp(split_local_buffer[0], "addf")) {
+		string = kmalloc(sizeof(char) * strlen(split_local_buffer[1]), GFP_KERNEL);
+		strcpy(string, split_local_buffer[1]);
+		add_string(string, 1);
+	}
+	else if(!strcmp(split_local_buffer[0], "adde")) {
+		string = kmalloc(sizeof(char) * strlen(split_local_buffer[1]), GFP_KERNEL);
+		strcpy(string, split_local_buffer[1]);
+		add_string(string, 0);
+	}
+    	else if(!strcmp(split_local_buffer[0], "delf")) {
 		del_string(split_local_buffer[1], 0);
-    }
-    else if(!strcmp(split_local_buffer[0], "dela"))
-    {
-        del_string(split_local_buffer[1], 1);
-    }
+	}
+	else if(!strcmp(split_local_buffer[0], "dela")) {
+		del_string(split_local_buffer[1], 1);
+    	}
 
 	return local_buffer_size;
 }
@@ -170,13 +166,11 @@ static int list_init(void)
 	if (!proc_list)
 		return -ENOMEM;
 
-	proc_list_read = proc_create(procfs_file_read, 0000, proc_list,
-				     &r_pos);
+	proc_list_read = proc_create(procfs_file_read, 0000, proc_list, &r_pos);
 	if (!proc_list_read)
 		goto proc_list_cleanup;
 
-	proc_list_write = proc_create(procfs_file_write, 0000, proc_list,
-				      &w_pos);
+	proc_list_write = proc_create(procfs_file_write, 0000, proc_list, &w_pos);
 	if (!proc_list_write)
 		goto proc_list_read_cleanup;
 
@@ -191,7 +185,7 @@ proc_list_cleanup:
 
 static void list_exit(void)
 {
-    destroy_list();
+	destroy_list();
 	proc_remove(proc_list);
 }
 
