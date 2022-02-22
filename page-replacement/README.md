@@ -26,15 +26,9 @@ Replace the second chance LRU approximation algorithm with a counter based clock
     - Otherwise, decrement the counter by 1 and move the page to tail of list
 
 <br/>
-메모리 관리 통계 출력
-<br/>
 <br/>
 
-- Provide a system call that report memory management statistics to user level applications
-<br/>
-<br/>
-
- in more detail : http://www.cs.fsu.edu/~baker/opsys/assign/P4.html
+ in more detail : https://www.cs.rochester.edu/users/faculty/sandhya/csc256/assignments/kernel-programming4.html
 <br/>
 <br/>
 
